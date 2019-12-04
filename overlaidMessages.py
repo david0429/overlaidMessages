@@ -11,7 +11,7 @@ parser.add_argument('--sheets', type=int, default=5, help='Number of pages to cr
 def printSheets(sheets):
     for i in range(len(sheets[0])):
         for j in range(len(sheets)):
-            print sheets[i][j]
+            print sheets[j][i]
         print "--------------------------------------"
 
 def getLines(line, line_len, sheets):
@@ -25,7 +25,9 @@ def getLines(line, line_len, sheets):
 
     char_locations = sorted(char_locations)
 
-    sheet_data = [ [' '] * line_len ] * sheets
+    sheet_data = []
+    for i in range(sheets):
+        sheet_data.append( [' '] * line_len )
 
     for i in range(len(char_locations)):
         sheet_data[random.randint(0, sheets-1)][char_locations[i]] = line[i]
