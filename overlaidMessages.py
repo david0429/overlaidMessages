@@ -13,10 +13,10 @@ parser.add_argument('--sheets', type=int, default=5, help='Number of pages to cr
 def printSheets(sheets):
     for i in range(len(sheets[0])):
         for j in range(len(sheets)):
-            outString = ""
+            outString = "| "
             for k in sheets[j][i]:
                 outString = outString + k
-            print(outString)
+            print(outString + " |")
         print("-------------------")
 
 def getLines(line, line_len, sheets):
