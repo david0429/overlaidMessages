@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import argparse
 import random
+from math import floor
 
 parser = argparse.ArgumentParser(description='Hides a message in multiple overlaid pages')
 parser.add_argument('--padding', type=float, default=1.5, help='How much extra character padding is added to the longest word')
@@ -11,8 +13,11 @@ parser.add_argument('--sheets', type=int, default=5, help='Number of pages to cr
 def printSheets(sheets):
     for i in range(len(sheets[0])):
         for j in range(len(sheets)):
-            print sheets[j][i]
-        print "--------------------------------------"
+            outString = ""
+            for k in sheets[j][i]:
+                outString = outString + k
+            print(outString)
+        print("-------------------")
 
 def getLines(line, line_len, sheets):
     char_locations = []
@@ -32,6 +37,10 @@ def getLines(line, line_len, sheets):
     for i in range(len(char_locations)):
         sheet_data[random.randint(0, sheets-1)][char_locations[i]] = line[i]
 
+    for i in range(line_len):
+        if i not in char_locations:
+            sheet_data[random.randint(0, sheets-1)][i] = chr(random.randint(65, 90) + 32 * int(floor(random.randint(0, 5) / 5)))
+            sheet_data[random.randint(0, sheets-1)][i] = '█'
     return sheet_data
 
 def main(args):
